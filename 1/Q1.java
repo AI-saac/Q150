@@ -2,15 +2,19 @@ import java.util.LinkedList;
 import java.util.BitSet;
 
 public class Q1 {
-  public static void main(String[] args) { System.out.println(sieve(100)); }
-  public static LinkedList<Integer> sieve(int n) {
-    LinkedList<Integer> primes = new LinkedList<Integer>();
-    BitSet nonPrimes = new BitSet(n+1);
+  public static void main(String args[]) {
+    System.out.println(isUniqueChar(args[0]));
+  }
 
-    for (int p=2; p<=n; p=nonPrimes.nextClearBit(p+1)) {
-      for (int i=p*p; i<=n; i+=p) { nonPrimes.set(i); }
-      primes.add(p);
+  public static boolean isUniqueChar(String str) {
+    if (str.length() > 128) return false;
+
+    boolean[] char_set = new boolean[256];
+    for (int i = 0; i < str.length(); i++) {
+      int val = str.charAt(i);
+      if (char_set[val]) return false;
+      char_set[val] = true;
     }
-    return primes;
+    return true;
   }
 }
